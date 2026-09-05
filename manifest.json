@@ -1,0 +1,20 @@
+{
+  "name": "کافه کُد",
+  "short_name": "CafeCode",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#00bfa5",
+  "theme_color": "#00796b",
+  "icons": [
+    {
+      "src": "brandlogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "brandlogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
