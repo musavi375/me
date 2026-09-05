@@ -1,179 +1,178 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کافه کد | کافه کد</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کافه کد</title>
 
-    <!-- PWA -->
-    <meta name="theme-color" content="#00bfa5">
-    <link rel="manifest" href="manifest.json">
+<!-- PWA -->
+<link rel="manifest" href="/me/manifest.json">
+<meta name="theme-color" content="#00bfa5">
 
-    <style>
-        @import url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css');
+<style>
+@import url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css');
 
-        :root {
-            --primary-color: #00bfa5;
-            --dark-blue: #00796b;
-            --white: #ffffff;
-            --bg-light: #e0f2f1;
-            --text-color: #333;
-        }
+:root {
+  --primary-color:#00bfa5;
+  --dark-blue:#00796b;
+  --white:#fff;
+  --bg-light:#e0f2f1;
+  --text-color:#333;
+}
 
-        body {
-            font-family: 'Vazir', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-light);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
+body {
+  font-family:'Vazir',sans-serif;
+  margin:0;
+  background:var(--bg-light);
+  color:var(--text-color);
+  overflow-x:hidden;
+}
 
-        body.dark {
-            background-color: #121212;
-            color: #eee;
-        }
-        body.dark header {
-            background: linear-gradient(135deg, #333, #000);
-        }
-        body.dark .product-card {
-            background: #1e1e1e;
-        }
+/* حالت تاریک */
+body.dark { background:#121212; color:#eee; }
+body.dark header { background:linear-gradient(135deg,#333,#000); }
+body.dark .product-card { background:#1e1e1e; }
 
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-blue));
-            color: var(--white);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+/* هدر */
+header {
+  background:linear-gradient(135deg,var(--primary-color),var(--dark-blue));
+  color:var(--white);
+  text-align:center;
+  padding:20px;
+  box-shadow:0 4px 6px rgba(0,0,0,.1);
+}
+.brand-name { font-size:2.5rem; font-weight:bold; }
 
-        .brand-name {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
+/* سه نقطه */
+#menuToggle {
+  position:fixed;
+  right:15px;
+  top:15px;
+  font-size:35px;
+  cursor:pointer;
+  z-index:999;
+}
 
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
+/* منوی کناری */
+#sideMenu {
+  position:fixed;
+  right:-250px;
+  top:0;
+  width:250px;
+  height:100%;
+  background:#fff;
+  box-shadow:-3px 0 10px rgba(0,0,0,.2);
+  padding:20px;
+  transition:.3s;
+  z-index:998;
+}
 
-        .nav-btn {
-            background-color: var(--white);
-            color: var(--dark-blue);
-            border: none;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+/* ناوبری */
+nav {
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+.nav-btn {
+  background:var(--white);
+  color:var(--dark-blue);
+  border:none;
+  padding:10px 20px;
+  border-radius:25px;
+  cursor:pointer;
+  transition:.3s;
+}
+.nav-btn:hover { background:var(--primary-color); color:#fff; }
 
-        .nav-btn:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-            transform: scale(1.05);
-        }
+/* بخش‌ها */
+.section-container {
+  max-width:1200px;
+  margin:30px auto;
+  padding:20px;
+  display:none;
+}
+.section-container.active { display:block; }
 
-        .section-container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 20px;
-            display: none;
-        }
+/* گالری */
+.products-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+}
+.product-card {
+  background:#fff;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+.product-img-wrapper {
+  height:250px;
+  overflow:hidden;
+  cursor:zoom-in;
+}
+.product-img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.4s;
+}
+.product-card:hover .product-img { transform:scale(1.1); }
 
-        .section-container.active {
-            display: block;
-        }
+/* پنل مدیریت */
+.admin-panel {
+  display:none;
+  background:#fff;
+  border:2px dashed var(--primary-color);
+  border-radius:10px;
+  padding:20px;
+  margin:20px auto;
+  max-width:800px;
+}
+.edit-btn,.delete-btn {
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  color:#fff;
+  cursor:pointer;
+}
+.edit-btn { background:var(--primary-color); }
+.delete-btn { background:#ff5252; }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+[contenteditable="true"] { border:1px dashed var(--primary-color); }
 
-        .product-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .product-img-wrapper {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            cursor: zoom-in;
-        }
-
-        .product-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.4s;
-        }
-
-        .product-card:hover .product-img {
-            transform: scale(1.1);
-        }
-
-        /* سه نقطه */
-        #menuToggle {
-            position: fixed;
-            right: 15px;
-            top: 15px;
-            font-size: 35px;
-            cursor: pointer;
-            z-index: 999;
-        }
-
-        #sideMenu {
-            position: fixed;
-            right: -250px;
-            top: 0;
-            width: 250px;
-            height: 100%;
-            background: #fff;
-            box-shadow: -3px 0 10px rgba(0,0,0,0.2);
-            padding: 20px;
-            transition: 0.3s;
-            z-index: 998;
-        }
-
-        .admin-panel {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px auto;
-            max-width: 800px;
-            border: 2px dashed var(--primary-color);
-            display: none;
-        }
-
-        .edit-btn, .delete-btn {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .edit-btn { background: var(--primary-color); }
-        .delete-btn { background: #ff5252; }
-
-        [contenteditable="true"] {
-            border: 1px dashed var(--primary-color);
-        }
-    </style>
+/* مودال عکس */
+#imgModal {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+#modalImg {
+  max-width:90vw;
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:10px;
+}
+.close-modal {
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:40px;
+  color:white;
+  cursor:pointer;
+}
+</style>
 </head>
 <body>
 
 <header>
-    <div class="brand-name">کافه کد</div>
-    <img src="brandlogo.png" style="width:120px; margin-top:10px;">
+  <div class="brand-name">کافه کد</div>
+  <img src="/me/images/brandlogo.png" style="width:120px;margin-top:10px;">
 </header>
 
 <!-- سه نقطه -->
@@ -181,244 +180,235 @@
 
 <!-- منوی کناری -->
 <div id="sideMenu">
-    <h3>منوی سایت</h3>
+  <h3>منوی سایت</h3>
 
-    <button onclick="checkAdmin()" style="width:100%; padding:10px; background:#00796b; color:white; border:none; border-radius:5px;">
-        ورود مدیر
-    </button>
+  <button onclick="checkAdmin()" style="width:100%;padding:10px;background:#00796b;color:#fff;border:none;border-radius:5px;">
+    ورود مدیر
+  </button>
 
-    <button onclick="toggleDarkMode()" style="width:100%; padding:10px; background:#00bfa5; color:white; border:none; border-radius:5px; margin-top:10px;">
-        حالت تاریک / روشن
-    </button>
+  <button onclick="toggleDarkMode()" style="width:100%;padding:10px;background:#00bfa5;color:#fff;border:none;border-radius:5px;margin-top:10px;">
+    حالت تاریک / روشن
+  </button>
 </div>
 
 <nav>
-    <button class="nav-btn" onclick="openSection('logo')">لوگو</button>
-    <button class="nav-btn" onclick="openSection('card')">کارت ویزیت</button>
-    <button class="nav-btn" onclick="openSection('tract')">تراکت</button>
+  <button class="nav-btn" onclick="openSection('logo')">لوگو</button>
+  <button class="nav-btn" onclick="openSection('card')">کارت ویزیت</button>
+  <button class="nav-btn" onclick="openSection('tract')">تراکت</button>
 </nav>
 
 <!-- پنل مدیریت -->
 <div class="admin-panel" id="adminPanel">
-    <h3>افزودن بخش جدید</h3>
-    <input id="newSectionName" placeholder="نام بخش..." style="width:90%; padding:8px;">
-    <button class="add-section-btn" onclick="addNewSection()">افزودن بخش</button>
+  <h3>افزودن بخش جدید</h3>
+  <input id="newSectionName" placeholder="نام بخش..." style="width:90%;padding:8px;">
+  <button onclick="addNewSection()" style="padding:8px 15px;background:#00796b;color:#fff;border:none;border-radius:5px;">افزودن بخش</button>
 
-    <hr>
+  <hr>
 
-    <h3>افزودن عکس جدید</h3>
-    <input id="newImgTitle" placeholder="عنوان عکس" style="width:90%; padding:8px;">
-    <input id="newImgDesc" placeholder="توضیحات عکس" style="width:90%; padding:8px; margin-top:5px;">
-    <input id="newImgSrc" placeholder="نام فایل عکس (مثلاً logo4.png)" style="width:90%; padding:8px; margin-top:5px;">
-    <button class="add-section-btn" onclick="addNewImage()">افزودن عکس</button>
+  <h3>افزودن عکس جدید</h3>
+  <input id="newImgTitle" placeholder="عنوان عکس" style="width:90%;padding:8px;">
+  <input id="newImgDesc" placeholder="توضیحات عکس" style="width:90%;padding:8px;margin-top:5px;">
+  <input id="newImgSrc" placeholder="نام فایل عکس (مثلاً logo4.png)" style="width:90%;padding:8px;margin-top:5px;">
+  <button onclick="addNewImage()" style="padding:8px 15px;background:#00796b;color:#fff;border:none;border-radius:5px;">افزودن عکس</button>
+
+  <hr>
+
+  <h3>حذف بخش</h3>
+  <input id="deleteSectionName" placeholder="نام بخش برای حذف..." style="width:90%;padding:8px;">
+  <button onclick="deleteSection()" style="padding:8px 15px;background:#ff5252;color:#fff;border:none;border-radius:5px;">حذف بخش</button>
 </div>
 
 <!-- بخش‌ها -->
 <div id="logo" class="section-container active">
-    <h2 class="section-title">گالری لوگو</h2>
-    <div class="products-grid" id="grid-logo"></div>
+  <h2 class="section-title">گالری لوگو</h2>
+  <div class="products-grid" id="grid-logo"></div>
 </div>
 
 <div id="card" class="section-container">
-    <h2 class="section-title">گالری کارت ویزیت</h2>
-    <div class="products-grid" id="grid-card"></div>
+  <h2 class="section-title">گالری کارت ویزیت</h2>
+  <div class="products-grid" id="grid-card"></div>
 </div>
 
 <div id="tract" class="section-container">
-    <h2 class="section-title">گالری تراکت</h2>
-    <div class="products-grid" id="grid-tract"></div>
+  <h2 class="section-title">گالری تراکت</h2>
+  <div class="products-grid" id="grid-tract"></div>
 </div>
 
-<!-- مودال -->
-<div id="imgModal" class="fullscreen-modal" onclick="closeModal()">
-    <span class="close-modal">&times;</span>
-    <img id="modalImg">
+<!-- مودال عکس -->
+<div id="imgModal" onclick="closeModal()">
+  <span class="close-modal">&times;</span>
+  <img id="modalImg">
 </div>
 
 <script>
 /* داده‌ها */
-let sectionsData = {
-    logo: [
-        { title: "لوگوی کافه کد", desc: "طراحی مدرن و مینیمال", img: "logo1.png" },
-        { title: "لوگوی خیاطی", desc: "خیاطی خوش پوش", img: "logo2.png" },
-        { title: "لوگوی مبلمان", desc: "مبلمان رفیعی", img: "logo3.png" }
-    ],
-    card: [
-        { title: "کارت ویزیت کافه کد", desc: "قابلیت شخصی سازی متن", img: "card1.png" },
-        { title: "کارت ویزیت خیاطی", desc: "درج شعار و لینک سایت", img: "card2.png" },
-        { title: "کارت ویزیت مبلمان", desc: "طراحی لوکس", img: "card3.png" }
-    ],
-    tract: [
-        { title: "تراکت تبلیغاتی", desc: "قابل اسکن وجود لینک سایت", img: "tract1.png" },
-        { title: "تراکت تبلیغاتی", desc: "طراحی رنگی", img: "tract2.png" },
-        { title: "تراکت تبلیغاتی", desc: "معرفی خدمات", img: "tract3.png" }
-    ]
+let sectionsData={
+  logo:[
+    {title:"لوگوی کافه کد",desc:"طراحی مدرن و مینیمال",img:"/me/images/logo1.png"},
+    {title:"لوگوی خیاطی",desc:"خیاطی خوش پوش",img:"/me/images/logo2.png"},
+    {title:"لوگوی مبلمان",desc:"مبلمان رفیعی",img:"/me/images/logo3.png"}
+  ],
+  card:[
+    {title:"کارت ویزیت کافه کد",desc:"قابلیت شخصی سازی متن",img:"/me/images/card1.png"},
+    {title:"کارت ویزیت خیاطی",desc:"درج شعار و لینک سایت",img:"/me/images/card2.png"},
+    {title:"کارت ویزیت مبلمان",desc:"طراحی لوکس",img:"/me/images/card3.png"}
+  ],
+  tract:[
+    {title:"تراکت تبلیغاتی",desc:"قابل اسکن وجود لینک سایت",img:"/me/images/tract1.png"},
+    {title:"تراکت تبلیغاتی",desc:"طراحی رنگی",img:"/me/images/tract2.png"},
+    {title:"تراکت تبلیغاتی",desc:"معرفی خدمات",img:"/me/images/tract3.png"}
+  ]
 };
 
-let isAdmin = false;
+let isAdmin=false;
 
 /* رندر بخش‌ها */
-function renderSections() {
-    for (const [sectionId, items] of Object.entries(sectionsData)) {
-        const container = document.getElementById(`grid-${sectionId}`);
-        container.innerHTML = "";
-
-        items.forEach((item, index) => {
-            const card = document.createElement("div");
-            card.className = "product-card";
-
-            card.innerHTML = `
-                <div class="product-img-wrapper" onclick="openModal('${item.img}')">
-                    <img src="${item.img}" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title" id="title-${sectionId}-${index}">${item.title}</h3>
-                    <p class="product-desc" id="desc-${sectionId}-${index}">${item.desc}</p>
-                    ${isAdmin ? `
-                        <button class="edit-btn" onclick="toggleEdit(this)">ویرایش</button>
-                        <button class="delete-btn" onclick="deleteItem('${sectionId}', ${index})">حذف</button>
-                    ` : ""}
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
+function renderSections(){
+  for(const [id,items] of Object.entries(sectionsData)){
+    const container=document.getElementById(`grid-${id}`);
+    if(!container)continue;
+    container.innerHTML="";
+    items.forEach((item,i)=>{
+      container.innerHTML+=`
+      <div class="product-card">
+        <div class="product-img-wrapper" onclick="openModal('${item.img}')">
+          <img src="${item.img}" class="product-img">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title" id="title-${id}-${i}">${item.title}</h3>
+          <p class="product-desc" id="desc-${id}-${i}">${item.desc}</p>
+          ${isAdmin?`
+            <button class="edit-btn" onclick="toggleEdit(this)">ویرایش</button>
+            <button class="delete-btn" onclick="deleteItem('${id}',${i})">حذف</button>
+          `:""}
+        </div>
+      </div>`;
+    });
+  }
 }
 
 /* باز کردن بخش */
-function openSection(id) {
-    document.querySelectorAll(".section-container").forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+function openSection(id){
+  document.querySelectorAll(".section-container").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-/* مودال */
-function openModal(src) {
-    document.getElementById("modalImg").src = src;
-    document.getElementById("imgModal").style.display = "flex";
+/* مودال عکس */
+function openModal(src){
+  document.getElementById("modalImg").src=src;
+  document.getElementById("imgModal").style.display="flex";
 }
-function closeModal() {
-    document.getElementById("imgModal").style.display = "none";
+function closeModal(){
+  document.getElementById("imgModal").style.display="none";
 }
 
 /* ورود مدیر */
-function checkAdmin() {
-    const pass = prompt("رمز عبور را وارد کنید:");
-    if (pass === "mmom26326@gmail.com") {
-        isAdmin = true;
-        document.getElementById("adminPanel").style.display = "block";
-        renderSections();
-        alert("ورود موفق!");
-    } else {
-        alert("رمز اشتباه است.");
-    }
+function checkAdmin(){
+  const pass=prompt("رمز عبور را وارد کنید:");
+  if(pass==="mmom26326@gmail.com"){
+    isAdmin=true;
+    document.getElementById("adminPanel").style.display="block";
+    renderSections();
+    alert("ورود موفق!");
+  } else alert("رمز اشتباه است.");
 }
 
 /* افزودن بخش */
-function addNewSection() {
-    const name = newSectionName.value.trim();
-    if (!name) return alert("نام بخش را وارد کنید");
+function addNewSection(){
+  const name=newSectionName.value.trim();
+  if(!name)return alert("نام بخش را وارد کنید");
 
-    const key = name.toLowerCase().replace(/\s+/g, "");
-    if (sectionsData[key]) return alert("این بخش وجود دارد");
+  const key=name.toLowerCase().replace(/\s+/g,"");
+  if(sectionsData[key])return alert("این بخش وجود دارد");
 
-    sectionsData[key] = [];
+  sectionsData[key]=[];
 
-    const btn = document.createElement("button");
-    btn.className = "nav-btn";
-    btn.innerText = name;
-    btn.onclick = () => openSection(key);
-    document.querySelector("nav").appendChild(btn);
+  const btn=document.createElement("button");
+  btn.className="nav-btn";
+  btn.innerText=name;
+  btn.onclick=()=>openSection(key);
+  document.querySelector("nav").appendChild(btn);
 
-    const div = document.createElement("div");
-    div.id = key;
-    div.className = "section-container";
-    div.innerHTML = `
-        <h2 class="section-title">${name}</h2>
-        <div class="products-grid" id="grid-${key}"></div>
-    `;
-    document.body.appendChild(div);
+  const div=document.createElement("div");
+  div.id=key;
+  div.className="section-container";
+  div.innerHTML=`<h2 class="section-title">${name}</h2><div class="products-grid" id="grid-${key}"></div>`;
+  document.body.appendChild(div);
 
-    renderSections();
+  renderSections();
 }
 
 /* افزودن عکس */
-function addNewImage() {
-    const title = newImgTitle.value.trim();
-    const desc = newImgDesc.value.trim();
-    const src = newImgSrc.value.trim();
+function addNewImage(){
+  const title=newImgTitle.value.trim();
+  const desc=newImgDesc.value.trim();
+  const src=newImgSrc.value.trim();
+  if(!title||!desc||!src)return alert("همه فیلدها لازم است");
 
-    if (!title || !desc || !src) return alert("همه فیلدها لازم است");
+  const active=document.querySelector(".section-container.active").id;
+  sectionsData[active].push({title,desc,img:"/me/images/"+src});
+  renderSections();
+}
 
-    const active = document.querySelector(".section-container.active").id;
-
-    sectionsData[active].push({ title, desc, img: src });
+/* حذف عکس */
+function deleteItem(section,index){
+  if(confirm("حذف شود؟")){
+    sectionsData[section].splice(index,1);
     renderSections();
-    alert("عکس اضافه شد!");
+  }
 }
 
-/* ویرایش */
-function toggleEdit(btn) {
-    const card = btn.closest(".product-card");
-    const title = card.querySelector(".product-title");
-    const desc = card.querySelector(".product-desc");
+/* حذف بخش */
+function deleteSection(){
+  const name=deleteSectionName.value.trim();
+  if(!name)return alert("نام بخش را وارد کنید");
 
-    if (title.isContentEditable) {
-        title.contentEditable = false;
-        desc.contentEditable = false;
-        btn.innerText = "ویرایش";
-    } else {
-        title.contentEditable = true;
-        desc.contentEditable = true;
-        btn.innerText = "ذخیره";
+  const key=name.toLowerCase().replace(/\s+/g,"");
+  if(!sectionsData[key])return alert("بخشی با این نام وجود ندارد");
 
-        title.onblur = () => saveEdit(title.id, title.innerText);
-        desc.onblur = () => saveEdit(desc.id, desc.innerText);
-    }
-}
+  if(confirm(`حذف بخش "${name}"؟`)){
+    delete sectionsData[key];
 
-function saveEdit(id, text) {
-    const [type, section, index] = id.split("-");
-    sectionsData[section][index][type] = text;
-}
+    const div=document.getElementById(key);
+    if(div)div.remove();
 
-/* حذف */
-function deleteItem(section, index) {
-    if (confirm("حذف شود؟")) {
-        sectionsData[section].splice(index, 1);
-        renderSections();
-    }
+    const btn=[...document.querySelectorAll(".nav-btn")].find(b=>b.innerText===name);
+    if(btn)btn.remove();
+
+    renderSections();
+    alert("بخش حذف شد");
+  }
 }
 
 /* حالت تاریک */
-function toggleDarkMode() {
-    document.body.classList.toggle("dark");
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
 }
 
 /* سه نقطه */
-menuToggle.onclick = () => {
-    sideMenu.style.right = sideMenu.style.right === "0px" ? "-250px" : "0px";
+menuToggle.onclick=()=>{
+  sideMenu.style.right=sideMenu.style.right==="0px"?"-250px":"-250px"?"0px":"0px";
+  sideMenu.style.right=sideMenu.style.right==="0px"?"-250px":"0px";
 };
 
-/* ثبت سرویس ورکر */
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js");
+/* سرویس ورکر */
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("/me/sw.js");
 }
 
-/* دکمه نصب اپ */
+/* نصب اپ */
 let deferredPrompt;
-window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    const installBtn = document.createElement("button");
-    installBtn.innerText = "نصب اپ";
-    installBtn.style.cssText = "width:100%; padding:10px; background:#00bfa5; color:white; border:none; border-radius:5px; margin-top:10px;";
-    installBtn.onclick = () => {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(() => deferredPrompt = null);
-    };
-
-    sideMenu.appendChild(installBtn);
+window.addEventListener("beforeinstallprompt",(e)=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  const installBtn=document.createElement("button");
+  installBtn.innerText="نصب اپ";
+  installBtn.style.cssText="width:100%;padding:10px;background:#00bfa5;color:#fff;border:none;border-radius:5px;margin-top:10px;";
+  installBtn.onclick=()=>{
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(()=>{deferredPrompt=null;});
+  };
+  document.getElementById("sideMenu").appendChild(installBtn);
 });
 
 renderSections();
